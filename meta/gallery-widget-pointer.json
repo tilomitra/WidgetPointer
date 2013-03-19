@@ -1,7 +1,11 @@
 {
     "gallery-widget-pointer": {
         "requires": [
-            "yui-base"
-        ]
+            "widget", 
+            "base-build", 
+            "align-plugin", 
+            "classnamemanager"
+        ],
+        "skinnable": true
     }
 }
