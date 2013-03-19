@@ -22,7 +22,7 @@
         POINTER_TEMPLATE = '<div class="' + CLASSES.pointer + '"></div>',
 
         //HTML5 Data Attributes
-        DATA_POINT = 'data-point';
+        DATA_PLACEMENT = 'data-placement';
 
     function Pointer() {
 
@@ -32,7 +32,7 @@
     }
 
     Pointer.ATTRS = {
-        point : {
+        placement : {
             value: 'above'
         }
     };
@@ -48,18 +48,18 @@
             this._pointer = Y.Node.create(POINTER_TEMPLATE);
             box.prepend(this._pointer);
             this._pointer.plug(Y.Plugin.Align);
+            this.alignPointer(box);
         },
 
         _bindUIPointer: function () {
-            this.after('pointChange', this._afterPointChange);
+            this.after('placementChange', this._afterPlacementChange);
         },
 
 
-        _getArrowType : function (point) {
+        _getArrowType : function (placement) {
             var arrowClass = '';
 
-            //Remember that the arrow must be pointing in the opposite direction of point! :)
-            switch (point) {
+            switch (placement) {
                 case "below":
                     arrowClass = CLASSES.above;
                     break;
@@ -73,7 +73,7 @@
                     arrowClass = CLASSES.right;
                     break;
                 default:
-                    Y.log("A correct point parameter was not specified. Accepted points are 'above', 'below', 'left' and 'right'.");
+                    Y.log("A correct placement parameter was not specified. Accepted placements are 'above', 'below', 'left' and 'right'.");
                     break;
             }
             
@@ -82,13 +82,13 @@
 
         alignPointer : function (node) {
             
-            var point = node.getAttribute(DATA_POINT) || this.get('point'),
+            var placement = node.getAttribute(DATA_PLACEMENT) || this.get('placement'),
                 box = this.get('boundingBox'),
-                arrowClass = this._getArrowType(point);
+                arrowClass = this._getArrowType(placement);
 
             this._pointer.set('className', '').addClass(CLASSES.pointer + " " + arrowClass);
 
-            switch (point) {
+            switch (placement) {
                 case "below":
                     this._pointer.align.to(box, "tc", "bc", true);
                     break;
@@ -107,10 +107,13 @@
             }            
         },
 
-        _afterPointChange: function (e) {
+        _afterPlacementChange: function (e) {
             var arrowClass = this._getArrowType(e.newVal);
             this._pointer.set('className', '').addClass(CLASSES.pointer + " " + arrowClass);
-            this.alignPointer(e.currentTarget.get('boundingBox'));
+
+            if (e.currentTarget instanceof Y.Widget) {
+                this.alignPointer(e.currentTarget.get('boundingBox'));
+            }
         }
         
     };
