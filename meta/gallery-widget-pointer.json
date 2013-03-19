@@ -6,6 +6,7 @@
             "align-plugin", 
             "classnamemanager"
         ],
-        "skinnable": true
+        "skinnable": true,
+        "version": 0.1
     }
 }
