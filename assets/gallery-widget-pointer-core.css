@@ -5,12 +5,11 @@
 .yui3-widget-pointer-left {
     width: 0;
     height: 0;
+    border: 5px solid transparent;
 }
 
 .yui3-widget-pointer-up {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid black;
+    border-bottom-color: black;
     bottom: 0;
     top: 0;
     left: 50%;
@@ -18,18 +17,14 @@
 }
 
 .yui3-widget-pointer-down {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid black;
+    border-top-color: black;
     top: 0;
     left: 50%;
     margin-left: -5px;
 }
 
 .yui3-widget-pointer-right {
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid black;
+    border-left-color: black;
     top: 50%;
     left: 0;
     margin-left: -5px;
@@ -37,9 +32,7 @@
 }
 
 .yui3-widget-pointer-left {
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent; 
-    border-right:5px solid black;
+    border-right-color: black;
     right: 0;
     top: 50%;
     margin-right: -5px;
