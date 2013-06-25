@@ -203,6 +203,10 @@
 
         /**
         Sets the correct position to the pointer node.
+        Providing a node still keeps the pointer "stuck" to the pointer box,
+        but it aligns the other coordinate to the center of the provided node.
+        This means that the pointer node always has the fat border of the arrow
+        in touch with the pointer box.
 
         @method _uiSetPointerAlign
         @param {Node} node Node to align the pointer to
@@ -214,6 +218,11 @@
                 box = this._pointerBox,
                 region = box.get('region');
 
+            // Use a region instead of a node for alignment with Plugin.Align
+            // This allows for changing some of the properties to match a
+            // different alignment strategy
+            // This changes the region in the axis opposite to the one
+            // touching the pointer box
             if (node && box !== node) {
                 Y.mix(region, node.get('region'), true,
                     (placement === 'above' || placement === 'below') ?
