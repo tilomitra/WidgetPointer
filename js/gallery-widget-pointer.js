@@ -89,7 +89,9 @@
             @type Node
             @protected
             **/
-            this._pointerBox = this.get('boundingBox');
+            if (!this._pointerBox) {
+                this._pointerBox = this.get('boundingBox');
+            }
         },
 
         destructor: function () {
